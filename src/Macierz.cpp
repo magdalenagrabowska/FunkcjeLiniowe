@@ -37,7 +37,7 @@ Wektor MacierzKw::zwroc_kolumne(int ind)const{
       exit(1);
     } 
     Wektor Kol;
-    for(int i=0;i<3;i++){
+    for(int i=0;i<ROZMIAR;i++){
       Kol[i]=Wiersz[i][ind];
     }
       
@@ -66,11 +66,11 @@ void MacierzKw::odwrotnosc(){
   cout<<"nie istnieje macierz odwrotna"<<endl;
   exit(2);
  }
-for(int i=0;i<3;i++){
-for(int j=0;j<3;j++){
+for(int i=0;i<ROZMIAR;i++){
+for(int j=0;j<ROZMIAR;j++){
  int b=0,c=0;
- for(int n=0;n<3;n++){
-   for(int z=0;z<3;z++){
+ for(int n=0;n<ROZMIAR;n++){
+   for(int z=0;z<ROZMIAR;z++){
      if(n!=i)
      if(z!=j){
       minor[b][c]=M.Wiersz[n][z];
@@ -137,14 +137,14 @@ double MacierzKw::wyznacznikGauss(){
 }
 MacierzKw MacierzKw::operator+ (const MacierzKw & M)const{
   MacierzKw Suma;
-   for(int ind=0;ind<3;ind++){
+   for(int ind=0;ind<ROZMIAR;ind++){
   Suma.Wiersz[ind]=Wiersz[ind]+M.Wiersz[ind];
    }
   return Suma;
   }
 MacierzKw MacierzKw::operator - (const MacierzKw & M)const{
   MacierzKw Suma;
-   for(int ind=0;ind<3;ind++){
+   for(int ind=0;ind<ROZMIAR;ind++){
   Suma.Wiersz[ind]=Wiersz[ind]-M.Wiersz[ind];
    }
   return Suma;
@@ -152,10 +152,10 @@ MacierzKw MacierzKw::operator - (const MacierzKw & M)const{
 MacierzKw MacierzKw::operator * (const MacierzKw & M)const{
   MacierzKw Suma;
   MacierzKw Mnoznik;
-  for(int ind=0;ind<3;ind++){
-  for(int j=0;j<3;j++){
+  for(int ind=0;ind<ROZMIAR;ind++){
+  for(int j=0;j<ROZMIAR;j++){
   Wektor Kolumna=M.zwroc_kolumne(j);
-  for(int i=0;i<3;i++){
+  for(int i=0;i<ROZMIAR;i++){
   Mnoznik.Wiersz[ind]=Wiersz[ind]*Kolumna[i];
   Suma[ind][j]+=Mnoznik[ind][i];
   }
@@ -165,24 +165,30 @@ MacierzKw MacierzKw::operator * (const MacierzKw & M)const{
   }  
  MacierzKw MacierzKw::operator * (double l)const{
    MacierzKw M;
-   for(int i=0;i<3;i++){
+   for(int i=0;i<ROZMIAR;i++){
     M.Wiersz[i]=Wiersz[i]*l;
    }
    return M;
  }
  bool MacierzKw::operator == (const MacierzKw & M) const{
-  if(M.Wiersz[0]==Wiersz[0] &&M.Wiersz[1]==Wiersz[1] && M.Wiersz[2]==Wiersz[2]) 
+  for(int i=0;i<ROZMIAR;i++){
+    if(M.Wiersz[i]!=Wiersz[i])
+    return false;
+    else;
+  }
   return true;
-  else return false;
  }
 bool MacierzKw::operator != (const MacierzKw & M) const{
-  if(M.Wiersz[0]==Wiersz[0] &&M.Wiersz[1]==Wiersz[1] && M.Wiersz[2]==Wiersz[2]) 
-  return false;
-  else return true;
+  for(int i=0;i<ROZMIAR;i++){
+    if(M.Wiersz[i]==Wiersz[i])
+    return false;
+    else;
+  }
+  return true;
   }
 std::istream& operator >> (std::istream &strm, MacierzKw &Mac){
-for(int i=0;i<3;i++){
-for(int j=0;j<3;j++){
+for(int i=0;i<ROZMIAR;i++){
+for(int j=0;j<ROZMIAR;j++){
 strm>>Mac(i,j);
 if(strm.fail())
 strm.setstate(std::ios::failbit);
@@ -191,7 +197,7 @@ strm.setstate(std::ios::failbit);
 return strm;
   } 
 std::ostream& operator << (std::ostream &strm, const MacierzKw &Mac){
-for(int i=0;i<3;i++){
+for(int i=0;i<ROZMIAR;i++){
 for(int j=0;j<3;j++){
 strm<<Mac(i,j)<<" ";
 if(strm.fail())
