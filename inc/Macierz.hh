@@ -4,7 +4,7 @@
 #include "rozmiar.h"
 #include <iostream>
 #include "Wektor.hh"
-
+#include<algorithm>
 /*
  *  Jest to klasa macierz, opisuje 3 rzedy tablic jednowymiarowych.
  *  Wraz z klasa wektor posluzy do rozwiazywania rownan liniowych.
@@ -33,8 +33,8 @@ class MacierzKw {
   const double & operator() (int Wie, int Kol) const;
   double & operator() (int Wie, int Kol);
 
- Wektor zwroc_kolumne(int ind)const; /*
-  void zmien_kolumne(int ind, Wektor nowa); */ 
+ Wektor zwroc_kolumne(int ind)const; 
+ void zmien_kolumne(int ind, Wektor nowa); 
 };
 
 /*

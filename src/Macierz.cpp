@@ -43,6 +43,9 @@ Wektor MacierzKw::zwroc_kolumne(int ind)const{
       
     return Kol;
   } 
+void MacierzKw::zmien_kolumne(int ind){
+zwroc_kolumne(ind+1);
+}
 void MacierzKw::transpozycja(){
   Wektor Kolumna1=zwroc_kolumne(0);
   Wektor Kolumna2=zwroc_kolumne(1);
@@ -66,7 +69,6 @@ void MacierzKw::odwrotnosc(){
 for(int i=0;i<3;i++){
 for(int j=0;j<3;j++){
  int b=0,c=0;
- 
  for(int n=0;n<3;n++){
    for(int z=0;z<3;z++){
      if(n!=i)
@@ -114,15 +116,19 @@ double MacierzKw::wyznacznikGauss(){
   double suma=0;
   MacierzKw M;
   M.Wiersz[0]=Wiersz[0];
+  if(Wiersz[0][0]==0){
+    M.Wiersz[1]=Wiersz[1]-(Wiersz[2]*(Wiersz[1][0]/Wiersz[2][0])); 
+    std::swap(M.Wiersz[0],M.Wiersz[2]);
+    M.Wiersz[2]=M.Wiersz[2]-(M.Wiersz[0]*(M.Wiersz[2][1]/M.Wiersz[0][1]));}
   if(Wiersz[1][0]==0){
     M.Wiersz[1]=Wiersz[1];
   }
   else M.Wiersz[1]=Wiersz[1]-(Wiersz[0]*(Wiersz[1][0]/Wiersz[0][0]));
   if(Wiersz[2][0]==0 && Wiersz[2][1]==0){
-    M.Wiersz[2]=Wiersz[2];
+  M.Wiersz[2]=Wiersz[2];
   }
-  else M.Wiersz[2]=Wiersz[2]-(Wiersz[0]*(Wiersz[2][0]/Wiersz[0][0]));
-  M.Wiersz[2]=M.Wiersz[2]-(M.Wiersz[1]*(M.Wiersz[2][1]/M.Wiersz[1][1]));
+  else{ M.Wiersz[2]=Wiersz[2]-(Wiersz[0]*(Wiersz[2][0]/Wiersz[0][0]));
+  M.Wiersz[2]=M.Wiersz[2]-(M.Wiersz[1]*(M.Wiersz[2][1]/M.Wiersz[1][1]));}
  if(Wiersz[0][0]==0 || Wiersz[1][1]==0 || Wiersz[2][2]==0){
   return suma;
   }

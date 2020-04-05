@@ -35,7 +35,6 @@ int main()
  cout<<"Odwrotnosc"<<endl;
 m1.odwrotnosc();
 cout<<m1;
-/*cout<<m1;
 cout<<endl;
 if (w1==w2)
 cout<<"supel"<<endl;
@@ -52,7 +51,7 @@ cout<<endl;
 double w7=m1.wyznacznikLaplace();
 cout<<"wyznacznikLaplace"<<endl;
 cout<<w7;
-cout<<endl; */
+cout<<endl; 
     if(cout.fail()){
     cout<<"Masz blad!"<<endl;
 }
