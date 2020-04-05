@@ -3,39 +3,78 @@
 
 #include "rozmiar.h"
 #include <iostream>
-
-
+#include <string.h>
+#include<math.h>
 /*
- *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
- *  i jakie ma glowne cechy.
+ *  Ta klasa opisuje wektor.
+ *  Wektor jest rozmiarow tablicy 1xwartosc zdefiniowana ROZMIAR.
+ *  Moze byc uzyty przy wyrazach wolnych albo przy niewiadomych.
+ *  
  */
 class Wektor {
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
-   */
+  double tab[ROZMIAR];
   public:
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
-   */    
+  Wektor(){
+    tab[0]=0; tab[1]=0; tab[2]=0;
+  }
+  Wektor operator + (const Wektor & W2) const;
+  Wektor operator - (const Wektor & W2) const;
+ 
+  Wektor operator * (const Wektor & W2) const;
+
+  Wektor  operator * (double li) const;
+
+  bool operator == (const Wektor & W2) const;
+  bool operator != (const Wektor & W2) const;
+
+  double dlugosc() const;   
+   
+  const double & operator[] (int index) const; 
+  double & operator[] (int index);
+  
 };
 
 
 /*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
-std::istream& operator >> (std::istream &Strm, Wektor &Wek);
+  *  Przeciazenie strumienia wejsciowego.Funkcja wczytuje podana wartosc od
+  *  uzytkownika.
+  * 
+  *  Opis poszczegolnych parametrow wywolania funkcji:
+  *   istream &strm  - odwolanie do sturmienia poprzez referencje,
+  *   Wektor &Wek  - wartosc,ktora powinna zostac wczytana i zapisana
+  *   w strukturze Wektor
+  *   
+  *   
+  *  Warunki wstepne:
+  *   strm musi byc strumieniem wejsciowym, by mozna bylo wczytac wartosci,
+  *   podane watosci musza byc podane w odpowiedniej formie (tutaj za pomoca tablicy)
+  *
+  *  Warunki koncowe:
+  *   wszystko musi byc poprawnie wczytane, w przeciwnym wypadku strumien jest bledny
+  *
+  *  Funkcja zwraca 
+  */
+ std::istream& operator >> (std::istream &Strm, Wektor &Wek);
 
 /*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
-std::ostream& operator << (std::ostream &Strm, const Wektor &Wek);
+  *  Przeciazenie strumienia wyjsciowego.Funkcja wyswietla dla uzytkownika
+  *  podana wartosc.
+  * 
+  *  Opis poszczegolnych parametrow wywolania funkcji:
+  *   ostream &strm  - odwolanie do sturmienia poprzez referencje,
+  *   const Wektor &Wek  - wartosc,ktora powinna zostac wyswietlona,
+  *   bez jej zmiany, w dodatku odwolujac sie do oryginalu
+  *   
+  *  Warunki wstepne:
+  *   strm musi byc strumieniem wyjsciowym, by mozna bylo wyswietlic wartosci,
+  *   watosci musza byc podane w odpowiedniej formie (tutaj za pomoca tablicy)
+  *
+  *  Warunki koncowe:
+  *   brak
+  *
+  *  Funkcja wyswietla na wyjsciu standardowym wartosci wektora.
+  */
+std::ostream& operator << (std::ostream &strm, const Wektor &Wek);
 
+Wektor operator * (double l1, Wektor W2);
 #endif
