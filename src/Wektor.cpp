@@ -50,10 +50,12 @@ for(int ind=0;ind<ROZMIAR;ind++){
 return Suma;
   }
 
-Wektor Wektor::operator * (const Wektor & W2) const{
-Wektor Suma;
+double Wektor::operator * (const Wektor & W2) const{
+double Suma; //iloczyn skalarny
+double mnoznik;
 for(int ind=0;ind<ROZMIAR;ind++){
-  Suma.tab[ind]=tab[ind]*W2.tab[ind];
+  mnoznik=tab[ind]*W2.tab[ind];
+  Suma+=mnoznik;
 }
 return Suma;
   }
@@ -67,7 +69,8 @@ return W2;
 
 bool Wektor::operator == (const Wektor & W2) const{
   for(int i=0;i<ROZMIAR;i++){
-    if(W2.tab[i]!=tab[i])
+    double wartosc=W2.tab[i]-tab[i];
+    if(0,01<wartosc)
     return false;
     else;
   }
@@ -75,7 +78,8 @@ bool Wektor::operator == (const Wektor & W2) const{
   }
 bool Wektor::operator != (const Wektor & W2) const{
   for(int i=0;i<ROZMIAR;i++){
-    if(W2.tab[i]==tab[i])
+    double wartosc=W2.tab[i]-tab[i];
+    if(0,01>wartosc)
     return false;
     else;
   }

@@ -12,8 +12,13 @@
 class MacierzKw {
   Wektor Wiersz[ROZMIAR]; // 3 wektory skladajace sie na macierz, bedace wierszami owej macierzy
   public:
-  /*MacierzKw(){
-  }*/
+  MacierzKw(){ 
+    for(int i=0;i<3;i++){
+     for(int j=0;j<3;j++){
+     Wiersz[i][j]=0; 
+    }
+  }
+  }
   void transpozycja(); 
   void odwrotnosc(); 
   double wyznacznikSarrus();
@@ -21,9 +26,9 @@ class MacierzKw {
   double wyznacznikGauss(); //za pomoca metody laplacea,gaussa,sarrusa
   MacierzKw operator + (const MacierzKw & M)const;
   MacierzKw operator - (const MacierzKw & M)const;
- MacierzKw operator * (const MacierzKw & M)const;
+  MacierzKw operator * (const MacierzKw & M)const;
   MacierzKw operator * (double l)const;
-
+  Wektor operator * (const Wektor & W)const;
   bool operator == (const MacierzKw & M) const;
   bool operator != (const MacierzKw & M) const;
 
@@ -34,7 +39,7 @@ class MacierzKw {
   double & operator() (int Wie, int Kol);
 
  Wektor zwroc_kolumne(int ind)const; 
- void zmien_kolumne(int ind, Wektor nowa); 
+ void zmien_kolumne(int ind); 
 };
 
 /*

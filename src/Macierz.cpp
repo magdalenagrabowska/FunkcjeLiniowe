@@ -61,7 +61,6 @@ void MacierzKw::odwrotnosc(){
  M.Wiersz[1]=Wiersz[1];
  M.Wiersz[2]=Wiersz[2];
  double a=1/wyznacznikSarrus();
- cout<<a<<endl;
  if(a==0){
   cout<<"nie istnieje macierz odwrotna"<<endl;
   exit(2);
@@ -162,13 +161,24 @@ MacierzKw MacierzKw::operator * (const MacierzKw & M)const{
   }
   }
   return Suma;
-  }  
- MacierzKw MacierzKw::operator * (double l)const{
+  } 
+MacierzKw MacierzKw::operator * (double l)const{
    MacierzKw M;
    for(int i=0;i<ROZMIAR;i++){
     M.Wiersz[i]=Wiersz[i]*l;
    }
    return M;
+ }
+Wektor MacierzKw::operator * (const Wektor &W) const{
+double Mnoznik;
+Wektor Wynik;  
+for(int ind=0;ind<ROZMIAR;ind++){
+for(int i=0;i<ROZMIAR;i++){
+Mnoznik=Wiersz[ind][i]*W[i];
+Wynik[ind]+=Mnoznik; 
+}
+}
+return Wynik;
  }
  bool MacierzKw::operator == (const MacierzKw & M) const{
   for(int i=0;i<ROZMIAR;i++){

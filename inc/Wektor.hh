@@ -15,12 +15,12 @@ class Wektor {
   double tab[ROZMIAR];
   public:
   Wektor(){
-    tab[0]=0; tab[1]=0; tab[2]=0;
-  }
+   tab[0]=0;tab[1]=0;tab[2]=0;
+  };
   Wektor operator + (const Wektor & W2) const;
   Wektor operator - (const Wektor & W2) const;
  
-  Wektor operator * (const Wektor & W2) const;
+  double operator * (const Wektor & W2) const;
 
   Wektor  operator * (double li) const;
 
@@ -52,7 +52,7 @@ class Wektor {
   *  Warunki koncowe:
   *   wszystko musi byc poprawnie wczytane, w przeciwnym wypadku strumien jest bledny
   *
-  *  Funkcja zwraca 
+  *  Funkcja wczytuje do klasy wektor podane wartosci
   */
  std::istream& operator >> (std::istream &Strm, Wektor &Wek);
 
